@@ -1,7 +1,6 @@
 import eslint from '@eslint/js'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
-import eslintPluginVue from 'eslint-plugin-vue'
 import stylistic from '@stylistic/eslint-plugin'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
@@ -14,8 +13,6 @@ export default tseslint.config(
   eslint.configs.recommended,
   /** ts推荐配置 */
   ...tseslint.configs.recommended,
-  /** vue推荐配置 */
-  ...eslintPluginVue.configs['flat/recommended'],
 
   stylistic.configs.customize({
     indent: 2,
@@ -30,7 +27,7 @@ export default tseslint.config(
    * javascript 规则
    */
   {
-    files: ['**/*.{js,mjs,cjs,vue}'],
+    files: ['**/*.{js,mjs,cjs,ts}'],
     rules: {
       'no-console': 'warn',
     },
@@ -51,41 +48,13 @@ export default tseslint.config(
   },
 
   /**
-   * vue 规则
-   */
-  {
-    files: ['**/*.vue'],
-    languageOptions: {
-      parserOptions: {
-        /** typescript项目需要用到这个 */
-        parser: tseslint.parser,
-        ecmaVersion: 'latest',
-        /** 允许在.vue 文件中使用 JSX */
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
-    },
-    rules: {
-      // 在这里追加 vue 规则
-      'vue/no-mutating-props': [
-        'error',
-        {
-          shallowOnly: true,
-        },
-      ],
-    },
-  },
-
-  /**
    * typescript 规则
    */
   {
-    files: ['**/*.{ts,tsx,vue,js}'],
+    files: ['**/*.{ts,tsx,js}'],
     rules: {
       'no-undef': 'off',
       'no-mixed-spaces-and-tabs': 'off',
-      'vue/multi-word-component-names': 'off',
     },
   },
 

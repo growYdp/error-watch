@@ -1,0 +1,6 @@
+{
+  "name": "@errorwatch/core",
+  "version": "1.1.2",
+  "main": "index.ts",
+  "license": "ISC"
+}
